@@ -1,0 +1,1 @@
+{"claims":{"aud":"http://example.org","exp":1730140270,"iat":1730136670,"jti":"4459554bda13bff88b72575036d202bb","sub":"spiffe://acme-corp/pubsub"},"headers":[{"KeyID":"spirl-dev-jwt-key-1","JSONWebKey":null,"Algorithm":"ES256","Nonce":"","ExtraHeaders":{"typ":"JWT"}}]}

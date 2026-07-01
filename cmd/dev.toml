@@ -1,0 +1,33 @@
+[federation]
+# port specifies the local port for serving the federation endpoint.
+# If zero or unset, federation will be disabled.
+port = 8080
+
+[td."example.com"]
+# x509_authority_ttl controls the expiration time for the x509 authority certificate.
+# x509_authority_ttl = "24h"
+
+# jwt_authority_ttl controls the expiration time for the JWT authority.
+# jwt_authority_ttl = "24h"
+
+[td."example.com".workload.frontend]
+# id_path sets the SPIFFE ID path of the workload. If not set, defaults to "/<workload_name>".
+# id_path = "/custom/frontend"
+
+# socket_path sets the file path of the UDS. If not set, defaults to
+# "<temp_dir>/spirl-dev/<trust_domain_name>/<workload_name>.sock" where <temp_dir>
+# is operating system dependent (see the spirlctl logs for the exact location).
+# socket_path = "/tmp/frontend.sock"
+
+# x509_svid_ttl controls the expiration time for the SVID x509 certificate.
+# x509_svid_ttl = "1h"
+
+# x509_svid_rotate_at controls the rotation duration for the SVID x509 certificate.
+# x509_svid_rotate_at = "10m"
+
+# jwt_svid_ttl controls the expiration time for a JWT SVID.
+# jwt_svid_ttl = "1h"
+
+[td."example.com".workload.backend]
+
+[td."acme-corp".workload.pubsub]

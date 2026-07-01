@@ -1,0 +1,39 @@
+name: Publish Docker Images
+
+on:
+  push:
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read # required for actions/checkout
+  packages: write # required for ko to publish packages
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      # Push target for ko. Resolves to ghcr.io/<owner>/<repo>.
+      KO_DOCKER_REPO: ghcr.io/${{ github.repository }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6
+        with:
+          go-version-file: go.mod
+
+      - name: Setup KO
+        uses: ko-build/setup-ko@61b4d1d396f5b2e7d6bb6fefdce3dc38d1a13445 # v0.10
+
+      - name: Build container
+        if: github.event_name == 'pull_request'
+        run: ko build --bare . --tags="${{ github.sha }}" --platform=linux/amd64,linux/arm64 --sbom=none --local
+
+      - name: Build and push container
+        if: github.event_name != 'pull_request'
+        run: ko build --bare . --tags="${{ github.ref_name }},latest" --platform=linux/amd64,linux/arm64 --sbom=none

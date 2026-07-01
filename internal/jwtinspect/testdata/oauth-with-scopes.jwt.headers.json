@@ -1,0 +1,1 @@
+{"claims":{"client_id":"test_app_id","exp":1708730050,"iat":1708726450,"scopes":["read","write"]},"headers":[{"KeyID":"","JSONWebKey":null,"Algorithm":"HS256","Nonce":"","ExtraHeaders":{"typ":"JWT"}}]}

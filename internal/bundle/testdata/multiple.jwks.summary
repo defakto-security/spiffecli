@@ -1,0 +1,9 @@
+Found 2 keys
+├── Key ID: 1dc0f172e8d6ef382d6d3a231f6c197dd68ce5ef
+│   ├── Key Type: RSA
+│   ├── Key Size: 2048
+│   └── Use: Signature
+└── Key ID: d9740a70b0972dccf75fa88bc529bd16a30573bd
+    ├── Key Type: RSA
+    ├── Key Size: 2048
+    └── Use: Signature

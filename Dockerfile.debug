@@ -1,0 +1,16 @@
+# Build stage: compile spiffecli for Linux
+FROM golang:1.26.4 AS builder
+
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /spiffecli .
+
+# Final stage: netshoot + spiffecli
+FROM nicolaka/netshoot
+
+COPY --from=builder /spiffecli /usr/local/bin/spiffecli
+
+ENTRYPOINT ["/bin/bash"]

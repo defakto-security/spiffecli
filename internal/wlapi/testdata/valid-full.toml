@@ -1,0 +1,15 @@
+[federation]
+port = 8080
+
+[td."example.com"]
+x509_authority_ttl = "48h"
+jwt_authority_ttl = "72h"
+
+[td."example.com".workload.frontend]
+id_path = "/custom/frontend"
+socket_path = "/tmp/frontend.sock"
+x509_svid_ttl = "2h"
+x509_svid_rotate_at = "20m"
+jwt_svid_ttl = "3h"
+
+[td."example.com".workload.backend]

@@ -1,0 +1,8 @@
+{
+    "label": "SPIFFE CLI Documentation",
+    "position": 2,
+    "link": {
+      "type": "generated-index",
+      "description": "SPIFFE CLI Documentation"
+    }
+}

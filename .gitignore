@@ -1,0 +1,50 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Binaries built using the makefile targets
+/bin/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# IDE artifacts
+*.swp
+.vscode/
+.idea/
+
+# Dynamically provisioned trust domains managed by Tilt
+/dev/trust-domains
+
+# Dev environment debug artifacts
+signer.state
+.DS_Store
+
+# dist folder used by docusaurus
+/dist/
+yarn.lock
+
+# Local tmp folder
+tmp
+
+# The spiffecli binary
+spiffecli
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+
+# orch (internal orchestration tooling — never publish)
+.orch/
+.ai/
+
+# Internal planning / design docs — never publish
+Plans/

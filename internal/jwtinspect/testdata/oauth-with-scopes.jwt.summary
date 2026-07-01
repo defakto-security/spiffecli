@@ -1,0 +1,7 @@
+Not a well-formed SVID!
+• token uses an unsupported signature algorithm                 
+• token does not have a valid SPIFFE ID in the "sub" claim      
+• token does not have an "aud" claim set with at least one value
+Token expired at: 2024-02-23 15:14:10 -0800 PST
+Token issued at: 2024-02-23 14:14:10 -0800 PST
+Signature Algorithm: HMAC using SHA-256

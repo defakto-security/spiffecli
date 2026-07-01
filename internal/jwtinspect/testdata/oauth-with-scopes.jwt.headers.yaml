@@ -1,0 +1,14 @@
+claims:
+    client_id: test_app_id
+    exp: 1.70873005e+09
+    iat: 1.70872645e+09
+    scopes:
+        - read
+        - write
+headers:
+    - keyid: ""
+      jsonwebkey: null
+      algorithm: HS256
+      nonce: ""
+      extraheaders:
+        typ: JWT

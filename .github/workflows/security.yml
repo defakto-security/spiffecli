@@ -1,0 +1,57 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday at 06:00 UTC
+
+jobs:
+  gosec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Run gosec
+        uses: securego/gosec@v2.27.1
+        with:
+          # -no-fail: lint job already enforces gosec rules; this job is for
+          # SARIF upload to the GitHub Security tab only.
+          args: '-no-fail -fmt sarif -out gosec.sarif ./...'
+
+      - name: Upload SARIF to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        continue-on-error: true  # requires GHAS; remove once enabled at org level
+        with:
+          sarif_file: gosec.sarif
+
+  trivy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Build debug image
+        run: docker build -f Dockerfile.debug -t spiffecli-debug:ci .
+
+      - name: Scan debug image with Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: 'spiffecli-debug:ci'
+          format: 'sarif'
+          output: 'trivy.sarif'
+          exit-code: '0'  # informational — findings appear in Security tab
+
+      - name: Upload Trivy SARIF
+        uses: github/codeql-action/upload-sarif@v4
+        continue-on-error: true  # requires GHAS; remove once enabled at org level
+        with:
+          sarif_file: trivy.sarif

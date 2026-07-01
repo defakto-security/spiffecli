@@ -1,0 +1,10 @@
+Appears to be a well-formed SVID.
+Token expires in 51 minutes 37 seconds
+Token issued at: 2024-10-28 10:31:10 -0700 PDT
+SPIFFE ID: spiffe://acme-corp/pubsub
+SPIFFE Trust Domain: acme-corp
+SPIFFE Path: /pubsub
+Audience claims:
+• http://example.org
+Key ID: spirl-dev-jwt-key-1
+Signature Algorithm: ECDSA using P-256 curve and SHA-256

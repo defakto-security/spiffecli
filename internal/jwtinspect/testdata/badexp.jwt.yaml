@@ -1,0 +1,4 @@
+claims:
+    iat: 1.516239022e+09
+    name: John Doe
+    sub: "1234567890"

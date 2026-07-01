@@ -1,0 +1,12 @@
+claims:
+    exp: 1.516239122e+09
+    iat: 1.516239022e+09
+    name: John Doe
+    sub: "1234567890"
+headers:
+    - keyid: ""
+      jsonwebkey: null
+      algorithm: HS256
+      nonce: ""
+      extraheaders:
+        typ: JWT

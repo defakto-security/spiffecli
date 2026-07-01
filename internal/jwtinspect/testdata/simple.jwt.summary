@@ -1,0 +1,8 @@
+Not a well-formed SVID!
+• token uses an unsupported signature algorithm                 
+• token does not have a valid SPIFFE ID in the "sub" claim      
+• token does not have an "aud" claim set with at least one value
+Token expired at: 2018-01-17 17:32:02 -0800 PST
+Token issued at: 2018-01-17 17:30:22 -0800 PST
+Subject: 1234567890
+Signature Algorithm: HMAC using SHA-256

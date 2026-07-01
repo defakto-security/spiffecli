@@ -1,0 +1,12 @@
+claims:
+    exp: 1.70881285e+09
+    iat: 1.70872645e+09
+    name: Test User
+    sub: test_user_123
+headers:
+    - keyid: ""
+      jsonwebkey: null
+      algorithm: HS256
+      nonce: ""
+      extraheaders:
+        typ: JWT

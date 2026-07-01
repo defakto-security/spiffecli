@@ -1,0 +1,28 @@
+version: 2
+
+project_name: spiffecli
+
+builds:
+  - id: "spiffecli-build"
+    targets:
+      - darwin_amd64
+      - darwin_arm64
+      - linux_amd64
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+    env:
+      - CGO_ENABLED=0
+
+# For documentation see https://goreleaser.com/customization/release/#github
+release:
+  github:
+    owner: defakto-security
+    name: spiffecli
+  draft: true
+  replace_existing_draft: true
+  prerelease: auto
+  make_latest: true
+  mode: append
+  name_template: "{{.ProjectName}}-v{{.Version}}"
+

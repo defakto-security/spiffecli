@@ -1,0 +1,6 @@
+claims:
+    aud: http://example.org
+    exp: 1.73014027e+09
+    iat: 1.73013667e+09
+    jti: 4459554bda13bff88b72575036d202bb
+    sub: spiffe://acme-corp/pubsub

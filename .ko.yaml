@@ -1,0 +1,7 @@
+defaultPlatforms:
+  - linux/arm64
+  - linux/amd64
+builds:
+  - id: spiffecli
+    dir: .
+    main: main.go
