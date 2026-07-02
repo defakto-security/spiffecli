@@ -24,7 +24,7 @@ release:
   github:
     owner: defakto-security
     name: spiffecli
-  draft: true
+  draft: false
   replace_existing_draft: true
   prerelease: auto
   make_latest: true
