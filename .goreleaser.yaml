@@ -31,10 +31,10 @@ release:
   mode: append
   name_template: "{{.ProjectName}}-v{{.Version}}"
 
-# Homebrew formula published to the tap repo on each release.
+# Homebrew cask published to the tap repo on each release (macOS only).
 # Users install with: brew install defakto-security/tap/spiffecli
-# For documentation see https://goreleaser.com/customization/homebrew/
-brews:
+# For documentation see https://goreleaser.com/customization/homebrew_casks/
+homebrew_casks:
   - name: spiffecli
     repository:
       owner: defakto-security
@@ -42,15 +42,18 @@ brews:
       # PAT with contents:write on the tap repo; the default GITHUB_TOKEN
       # cannot push to a different repository.
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    directory: Formula
+    directory: Casks
     homepage: "https://github.com/defakto-security/spiffecli"
     description: "A SPIFFE CLI"
-    license: "Apache-2.0"
     commit_author:
       name: goreleaser-bot
       email: goreleaser-bot@defakto.security
-    install: |
-      bin.install "spiffecli"
-    test: |
-      system "#{bin}/spiffecli", "--version"
+    # The binary is unsigned; strip the quarantine flag on install so macOS
+    # Gatekeeper does not block it on first run.
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/spiffecli"]
+          end
 
