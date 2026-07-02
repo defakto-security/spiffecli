@@ -23,6 +23,17 @@ jobs:
         with:
           go-version-file: go.mod
 
+      # Mint a short-lived token from the GitHub App installed on the tap repo.
+      # The default GITHUB_TOKEN cannot push to a different repository.
+      - name: Mint tap token
+        id: tap-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.TAP_APP_ID }}
+          private-key: ${{ secrets.TAP_APP_PRIVATE_KEY }}
+          owner: defakto-security
+          repositories: homebrew-tap
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
@@ -31,6 +42,6 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # PAT with contents:write on defakto-security/homebrew-tap so
-          # GoReleaser can push the generated formula there.
-          HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
+          # App-minted token with contents:write on defakto-security/homebrew-tap
+          # so GoReleaser can push the generated cask there.
+          HOMEBREW_TAP_GITHUB_TOKEN: ${{ steps.tap-token.outputs.token }}
