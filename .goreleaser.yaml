@@ -4,6 +4,11 @@ project_name: spiffecli
 
 builds:
   - id: "spiffecli-build"
+    ldflags:
+      - -s -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .Commit }}
+      - -X main.date={{ .Date }}
     targets:
       - darwin_amd64
       - darwin_arm64
