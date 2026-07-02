@@ -31,3 +31,26 @@ release:
   mode: append
   name_template: "{{.ProjectName}}-v{{.Version}}"
 
+# Homebrew formula published to the tap repo on each release.
+# Users install with: brew install defakto-security/tap/spiffecli
+# For documentation see https://goreleaser.com/customization/homebrew/
+brews:
+  - name: spiffecli
+    repository:
+      owner: defakto-security
+      name: homebrew-tap
+      # PAT with contents:write on the tap repo; the default GITHUB_TOKEN
+      # cannot push to a different repository.
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/defakto-security/spiffecli"
+    description: "A SPIFFE CLI"
+    license: "Apache-2.0"
+    commit_author:
+      name: goreleaser-bot
+      email: goreleaser-bot@defakto.security
+    install: |
+      bin.install "spiffecli"
+    test: |
+      system "#{bin}/spiffecli", "--version"
+
