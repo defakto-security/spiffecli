@@ -49,6 +49,13 @@ jobs:
           format: 'sarif'
           output: 'trivy.sarif'
           exit-code: '0'  # informational — findings appear in Security tab
+          ignore-unfixed: true  # drop CVEs with no available fix
+          # The nicolaka/netshoot base bundles debug tools (ctop, termshark,
+          # grpcurl, fortio, calicoctl) as old prebuilt binaries we don't
+          # control. Skip them so the scan reports on our spiffecli binary,
+          # not netshoot's. Add new base tools here if they start flooding
+          # the Security tab.
+          skip-files: 'usr/local/bin/ctop,usr/local/bin/termshark,usr/local/bin/grpcurl,usr/local/bin/fortio,usr/local/bin/calicoctl'
 
       - name: Upload Trivy SARIF
         uses: github/codeql-action/upload-sarif@v4
